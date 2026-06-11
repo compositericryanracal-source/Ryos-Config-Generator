@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>RyOS</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:#ffffff;
+    color:#111111;
+}
+
+.container{
+    max-width:720px;
+    margin:auto;
+    padding:40px;
+}
+
+.hidden{
+    display:none;
+}
+
+#home-screen,
+#loading-screen,
+#success-screen{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+
+#question-screen{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+h1{
+    font-size:4rem;
+    font-weight:700;
+    margin-bottom:24px;
+}
+
+.subtitle{
+    font-size:1.2rem;
+    color:#666;
+    line-height:1.8;
+    max-width:600px;
+    margin-bottom:40px;
+}
+
+#progress{
+    color:#888;
+    margin-bottom:20px;
+}
+
+#question{
+    font-size:2rem;
+    line-height:1.4;
+    margin-bottom:24px;
+}
+
+textarea{
+    width:100%;
+    min-height:180px;
+    border:1px solid #ddd;
+    border-radius:12px;
+    padding:18px;
+    font-size:16px;
+    margin-bottom:24px;
+    resize:vertical;
+}
+
+.button-group,
+.question-actions{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:none;
+    border-radius:12px;
+    background:#111;
+    color:white;
+    padding:16px 28px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+button:hover{
+    opacity:.92;
+}
+
+.secondary{
+    background:#f3f3f3;
+    color:#111;
+}
+
+#loading-screen h2,
+#success-screen h2{
+    margin-bottom:20px;
+}
+
+#loading-message{
+    color:#666;
+    margin-top:10px;
+}
+
+.footer{
+    margin-top:80px;
+    text-align:center;
+    color:#999;
+    font-size:14px;
+}
+
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+```
+<div id="home-screen">
+
+    <h1>RyOS</h1>
+
+    <p class="subtitle">
+        Generate a personalized AI configuration.<br><br>
+
+        Built around how you think, work,
+        communicate, and make decisions.<br><br>
+
+        The process takes less than 5 minutes.
+    </p>
+
+    <div class="button-group">
+
+        <button onclick="startQuestionnaire()">
+            Generate My Config
+        </button>
+
+        <button class="secondary"
+        onclick="window.location.href='ryos.html'">
+            Explore RyOS
+        </button>
+
+    </div>
+
+    <div class="footer">
+        Built on RyOS Core
+    </div>
+
+</div>
+
+<div id="question-screen" class="hidden">
+
+    <div id="progress">
+        Question 1 of 15
+    </div>
+
+    <h2 id="question">
+        Question
+    </h2>
+
+    <textarea id="answer"></textarea>
+
+    <div class="question-actions">
+
+        <button class="secondary"
+        onclick="previousQuestion()">
+            Back
+        </button>
+
+        <button onclick="nextQuestion()">
+            Next
+        </button>
+
+        <button class="secondary"
+        onclick="restartQuestionnaire()">
+            Restart
+        </button>
+
+    </div>
+
+</div>
+
+<div id="loading-screen" class="hidden">
+
+    <h2>
+        Generating your configuration...
+    </h2>
+
+    <p id="loading-message">
+        Analyzing operating patterns
+    </p>
+
+</div>
+
+<div id="success-screen" class="hidden">
+
+    <h2>
+        Your configuration is ready.
+    </h2>
+
+    <div class="button-group">
+
+        <button onclick="downloadConfig()">
+            Download Config
+        </button>
+
+        <button class="secondary"
+        onclick="location.reload()">
+            Generate Another
+        </button>
+
+    </div>
+
+</div>
+```
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
