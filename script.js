@@ -198,53 +198,7 @@ const config =
     await fetch("ryos-config")
         .then(r => r.text());
 
-const prompt = `
-
-========================
-RYOS COMPILER
-========================
-
-${compiler}
-
-========================
-RYOS CORE
-========================
-
-${core}
-
-========================
-REFERENCE CONFIG
-========================
-
-${config}
-
-========================
-USER ANSWERS
-========================
-
-${userAnswers.join("\n\n")}
-
-========================
-COMPILATION TASK
-========================
-
-Generate a new RyOS configuration.
-
-Follow the architecture defined by RyOS Core.
-
-Use the Reference Config only as a structural example.
-
-Do not copy identity, history, goals, environment, medical information, location, or personal details from the Reference Config.
-
-Infer a new configuration from the User Answers.
-
-Output only the final configuration.
-
-`;
-console.log("Compiler Length:", compiler.length);
-console.log("Core Length:", core.length);
-console.log("Config Length:", config.length);
-console.log("Prompt Length:", prompt.length);
+const prompt = hi
 
 
     const response = await fetch(
