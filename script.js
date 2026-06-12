@@ -71,7 +71,16 @@ function nextQuestion(){
 
 function previousQuestion(){
 
-    if(currentQuestion === 0) return;
+    if(currentQuestion === 0){
+
+        document.getElementById("question-screen")
+            .classList.add("hidden");
+
+        document.getElementById("home-screen")
+            .classList.remove("hidden");
+
+        return;
+    }
 
     answers[currentQuestion] =
         document.getElementById("answer").value;
