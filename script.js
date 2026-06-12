@@ -262,7 +262,7 @@ console.log(data);
 
 console.log(data);
 
-return "Error: No response returned from Gemini.";
+return JSON.stringify(data, null, 2);
 }
 /*
 ================================================
