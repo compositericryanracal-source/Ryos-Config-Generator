@@ -73,14 +73,16 @@ function previousQuestion(){
 
     if(currentQuestion === 0){
 
-        document.getElementById("question-screen")
-            .classList.add("hidden");
+    alert("BACK WORKS");
 
-        document.getElementById("home-screen")
-            .classList.remove("hidden");
+    document.getElementById("question-screen")
+        .classList.add("hidden");
 
-        return;
-    }
+    document.getElementById("home-screen")
+        .classList.remove("hidden");
+
+    return;
+}
 
     answers[currentQuestion] =
         document.getElementById("answer").value;
