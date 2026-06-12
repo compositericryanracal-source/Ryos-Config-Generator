@@ -73,8 +73,6 @@ function previousQuestion(){
 
     if(currentQuestion === 0){
 
-    alert("BACK WORKS");
-
     document.getElementById("question-screen")
         .classList.add("hidden");
 
@@ -107,7 +105,7 @@ function restartQuestionnaire(){
     renderQuestion();
 }
 
-function generateConfig(){
+async function generateConfig(){
 
     document.getElementById("question-screen")
         .classList.add("hidden");
@@ -127,19 +125,26 @@ function generateConfig(){
 
     }, 1000);
 
-    setTimeout(() => {
+    try{
 
-        clearInterval(loadingInterval);
+        generatedConfig = await callAI(answers);
 
-        generatedConfig = buildConfig();
+    } catch(error){
 
-        document.getElementById("loading-screen")
-            .classList.add("hidden");
+        console.error(error);
 
-        document.getElementById("success-screen")
-            .classList.remove("hidden");
+        generatedConfig =
+            "Error generating configuration.\n\n" +
+            error.message;
+    }
 
-    }, 4000);
+    clearInterval(loadingInterval);
+
+    document.getElementById("loading-screen")
+        .classList.add("hidden");
+
+    document.getElementById("success-screen")
+        .classList.remove("hidden");
 }
 
 function buildConfig(){
@@ -177,7 +182,59 @@ function downloadConfig(){
 
     a.click();
 }
+const API_KEY = "AQ.Ab8RN6JlUgz9xHkGtjnEEupkz77Y3zcPtps4_74FnC_eRajYeg";
 
+async function callAI(userAnswers){
+
+    const prompt = `
+You are RyOS Config Generator.
+
+The following answers belong to one user.
+
+${userAnswers.join("\n\n")}
+
+Create a personalized configuration.
+
+Return plain text only.
+`;
+
+    const response = await fetch(
+        "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY,
+        {
+            method: "POST",
+            headers:{
+                "Content-Type":"application/json"
+            },
+            body: JSON.stringify({
+                contents:[
+                    {
+                        parts:[
+                            {
+                                text: prompt
+                            }
+                        ]
+                    }
+                ]
+            })
+        }
+    );
+
+    const data = await response.json();
+
+    if (
+    data.candidates &&
+    data.candidates[0] &&
+    data.candidates[0].content &&
+    data.candidates[0].content.parts &&
+    data.candidates[0].content.parts[0]
+) {
+    return data.candidates[0].content.parts[0].text;
+}
+
+console.log(data);
+
+return "Error: No response returned from Gemini.";
+}
 /*
 ================================================
 
