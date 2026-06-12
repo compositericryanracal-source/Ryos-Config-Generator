@@ -200,27 +200,45 @@ const config =
 
 const prompt = `
 
-=== COMPILER ===
+========================
+RYOS COMPILER
+========================
 
 ${compiler}
 
-=== CORE ===
+========================
+RYOS CORE
+========================
 
 ${core}
 
-=== CONFIG ===
+========================
+REFERENCE CONFIG
+========================
 
 ${config}
 
-=== USER ANSWERS ===
+========================
+USER ANSWERS
+========================
 
 ${userAnswers.join("\n\n")}
 
-=== TASK ===
+========================
+COMPILATION TASK
+========================
 
-Generate a personalized RyOS configuration.
+Generate a new RyOS configuration.
 
-Return plain text only.
+Follow the architecture defined by RyOS Core.
+
+Use the Reference Config only as a structural example.
+
+Do not copy identity, history, goals, environment, medical information, location, or personal details from the Reference Config.
+
+Infer a new configuration from the User Answers.
+
+Output only the final configuration.
 
 `;
 
