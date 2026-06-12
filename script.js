@@ -247,6 +247,9 @@ Return plain text only.
 
     const data = await response.json();
 
+console.log("FULL RESPONSE");
+console.log(data);
+
     if (
     data.candidates &&
     data.candidates[0] &&
