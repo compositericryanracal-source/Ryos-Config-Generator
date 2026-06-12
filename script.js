@@ -241,6 +241,11 @@ Infer a new configuration from the User Answers.
 Output only the final configuration.
 
 `;
+console.log("Compiler Length:", compiler.length);
+console.log("Core Length:", core.length);
+console.log("Config Length:", config.length);
+console.log("Prompt Length:", prompt.length);
+
 
     const response = await fetch(
         "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY,
