@@ -186,16 +186,42 @@ const API_KEY = "AQ.Ab8RN6JlUgz9xHkGtjnEEupkz77Y3zcPtps4_74FnC_eRajYeg";
 
 async function callAI(userAnswers){
 
-    const prompt = `
-You are RyOS Config Generator.
+    const compiler =
+    await fetch("prompt")
+        .then(r => r.text());
 
-The following answers belong to one user.
+const core =
+    await fetch("ryos-core")
+        .then(r => r.text());
+
+const config =
+    await fetch("ryos-config")
+        .then(r => r.text());
+
+const prompt = `
+
+=== COMPILER ===
+
+${compiler}
+
+=== CORE ===
+
+${core}
+
+=== CONFIG ===
+
+${config}
+
+=== USER ANSWERS ===
 
 ${userAnswers.join("\n\n")}
 
-Create a personalized configuration.
+=== TASK ===
+
+Generate a personalized RyOS configuration.
 
 Return plain text only.
+
 `;
 
     const response = await fetch(
